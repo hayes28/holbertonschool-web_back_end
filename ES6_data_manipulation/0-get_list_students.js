@@ -7,13 +7,13 @@
 // Serena, id: 5, in San Francisco
 
 function getListStudents() {
-  const students = [
+  const students = [ // array of objects
     { id: 1, firstName: 'Guillaume', location: 'San Francisco' },
     { id: 2, firstName: 'James', location: 'Columbia' },
     { id: 5, firstName: 'Serena', location: 'San Francisco' },
   ];
 
-  return students;
+  return students; // return array of objects
 }
 
-export default getListStudents;
+export default getListStudents; // export function
