@@ -54,9 +54,3 @@ Replicate code from the previous task and implement a `get_hyper` method.
 The goal here is that if between two queries, certain rows are removed from the dataset, the user does not miss items from the dataset when changing the page.
 
 - File: `3-hypermedia_del_pagination.py`
-
-## How to Install
-
-Clone the repository:
-```bash
-git clone https://github.com/your_username/your_repository.git
