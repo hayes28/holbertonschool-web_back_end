@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Write a function called filter_datum that
-returns the log message obfuscated"""
+"""Connect to secure database"""
 from typing import List
 import logging
 import re
+import os
+import mysql.connector
 
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
@@ -52,3 +53,14 @@ def get_logger() -> logging.Logger:
     handler.setFormatter(formatter)
     logger.addHandler(handler)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Connects to the MySQL database and returns a connection object."""
+
+    return mysql.connector.connect(
+        user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
+        password=os.getenv('PERSONAL_DATA_DB_PASSWORD', ''),
+        host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
+        database=os.getenv('PERSONAL_DATA_DB_NAME')
+    )
