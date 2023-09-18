@@ -64,3 +64,34 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
         database=os.getenv('PERSONAL_DATA_DB_NAME')
     )
+
+
+def main():
+    """Read and filter data"""
+    logger = get_logger()
+
+    db = get_db()
+    cursor = db.cursor()
+
+    cursor.execute("SELECT * FROM users;")  # Select all rows
+    rows = cursor.fetchall()  # Fetch all rows
+    for row in rows:
+        row_dict = {
+            'name': row[0],
+            'email': row[1],
+            'phone': row[2],
+            'ssn': row[3],
+            'password': row[4],
+            'ip': row[5],
+            'last_login': row[6],
+            'user_agent': row[7]
+        }
+
+        message = "; ".join([f"{key}={value}" for key, value in row_dict.items()])
+        logger.info(message)  # Logger will use RedactingFormatter to redact sensitive fields
+
+    cursor.close()
+    db.close()
+
+if __name__ == "__main__":
+    main()
