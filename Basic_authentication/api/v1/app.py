@@ -40,6 +40,7 @@ def not_found(error) -> str:
 
 @app.before_request
 def before_request_func():
+    """ Before request handler """
     if auth is None:
         return
     if auth.require_auth(request.path, ['/api/v1/status/',
