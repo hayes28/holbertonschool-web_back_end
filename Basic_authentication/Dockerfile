@@ -5,10 +5,10 @@ FROM python:3.8
 WORKDIR /app
 
 # Copy the requirements.txt file into the container at /app
-COPY requirements.txt /app/
+COPY requirements.txt /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 # Copy the current directory contents into the container at /app
 COPY . /app
@@ -20,5 +20,5 @@ EXPOSE 5000
 ENV API_HOST=0.0.0.0
 ENV API_PORT=5000
 
-# Run the command to start your application
+# Run the command to start your application/command starts your API server.
 CMD ["python3", "-m", "api.v1.app"]
