@@ -19,11 +19,10 @@ class Auth:
         return path not in excluded_paths
 
     def authorization_header(self, request=None) -> str:
-        """ If request is None, returns None
-        If request doesn’t contain the header key Authorization, returns None
-        Otherwise, return the value of the header request Authorization"""
-        return None if request is None else request.headers.get
-    ('Authorization', None)
+        """ Method that returns None - request """
+        if request is None or 'Authorization' not in request.headers:
+            return None
+        return request.headers['Authorization']
 
     def current_user(self, request=None) -> User:
         """ Returns None - request will not be used. """
