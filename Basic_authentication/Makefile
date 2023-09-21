@@ -34,7 +34,7 @@ logs:
 
 # Shell container Tasks
 shell:
-	docker exec -it Tasks /bin/sh
+	docker exec -it Tasks /bin/bash
 
 # Clean all pycache
 clean:
