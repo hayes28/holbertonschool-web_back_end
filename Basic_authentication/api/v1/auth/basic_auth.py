@@ -68,13 +68,15 @@ class BasicAuth(Auth):
         # Fetch the list of users that match the email
         users = User.search({'email': user_email})
 
-        # If users were found, check the password
-        if users:
-            for user in users:
-                if user.is_valid_password(user_pwd):
-                    return user
-        return None
+        # If no user was found, return None
+        if not users:
+            return None
 
+        # If users were found, then find the one with the correct password
+        for user in users:
+            if user.is_valid_password(user_pwd):
+                return user
+        return None
 
     def current_user(self, request=None) -> TypeVar('User'):
         """
