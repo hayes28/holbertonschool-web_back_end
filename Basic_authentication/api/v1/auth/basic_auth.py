@@ -5,6 +5,7 @@ For the moment this class will be empty."""
 from api.v1.auth.auth import Auth
 import re
 from models.user import User
+from typing import TypeVar
 
 
 class BasicAuth(Auth):
@@ -61,3 +62,19 @@ class BasicAuth(Auth):
                          if user.is_valid_password(user_pwd)), None)
         else:
             return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """ overloads Auth and retrieves the User instance for a request """
+
+        # Get the Authorization header from the request
+        auth_header = self.authorization_header(request)
+        # Get the Base64 part of the Authorization header
+        auth_header = self.extract_base64_authorization_header(auth_header)
+        # Decode the Base64 part of the Authorization header
+        auth_header = self.decode_base64_authorization_header(auth_header)
+        # Get the user credentials from the Base64 part of the
+        # Authorization header
+        user_credentials = self.extract_user_credentials(auth_header)
+        # Return the User instance based on his email and password
+        user_email, user_pwd = user_credentials
+        return self.user_object_from_credentials(user_email, user_pwd)
