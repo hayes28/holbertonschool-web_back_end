@@ -55,28 +55,30 @@ class BasicAuth(Auth):
         return tuple(re.split(':', decoded_base64_authorization_header))
 
     def user_object_from_credentials(
-            self, user_email: str, user_pwd: str) -> User:
-        """
-        Returns the User instance based on email and password.
-        """
-        # Check for None or if not a string
-        if user_email is None or not isinstance(user_email, str):
-            return None
-        if user_pwd is None or not isinstance(user_pwd, str):
+            self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        """ Returns the User instance based on email and password """
+        if (user_email is None or type(user_email) is not str or
+                user_pwd is None or type(user_pwd) is not str):
             return None
 
-        # Fetch the list of users that match the email
-        users = User.search({'email': user_email})
+        try:
+            # Try fetching users with provided email
+            users = User.search({'email': user_email})
 
-        # If no user was found, return None
-        if not users:
+            # Check if any user was found with that email
+            if not users:
+                return None
+
+            # Assuming the email is unique and we get a single user
+            user = users[0]
+
+            # Verify password for fetched user
+            if not user.is_valid_password(user_pwd):
+                return None
+        except Exception:
             return None
 
-        # If users were found, then find the one with the correct password
-        for user in users:
-            if user.is_valid_password(user_pwd):
-                return user
-        return None
+        return user
 
     def current_user(self, request=None) -> TypeVar('User'):
         """
