@@ -7,7 +7,9 @@ from os import getenv
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -58,13 +60,14 @@ def before_request_func() -> str:
         return
     if auth.authorization_header(request) is None:
         abort(401)
-    current_user = auth.current_user(request)
-    if current_user is None:
+    user = auth.current_user(request)
+    if user is None:
         abort(403)
-    request.current_user = auth.current_user
+    request.current_user = auth.current_user(request)
 
 
 if __name__ == "__main__":
+    app.debug = True  # Enable debug mode
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
     app.run(host=host, port=port)
