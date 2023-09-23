@@ -29,6 +29,7 @@ if auth_type == "session_auth":
     from api.v1.auth.session_auth import SessionAuth
     auth = SessionAuth()
 
+
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     """Unauthorized handler
