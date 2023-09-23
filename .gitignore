@@ -1,2 +1,7 @@
 .vscode/settings.json
 *.pyc
+venv/
+Basic_authentication/docker-compose.yml
+Session_authentication/docker-compose.yml
+__MACOSX/
+Basic_authentication/
