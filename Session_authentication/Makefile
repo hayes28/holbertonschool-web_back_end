@@ -6,7 +6,11 @@ build:
 
 # Run docker container Tasks with code hot-reloading, debug, and development environment
 run:
-	docker run --name Tasks -p 5000:5000 -e API_HOST=0.0.0.0 -e API_PORT=5000 -e FLASK_ENV=development -e FLASK_DEBUG=1 -v $(PWD):/app basic_auth
+	docker run --name Tasks -p 5000:5000 -e API_HOST=0.0.0.0 \
+	-e API_PORT=5000 \
+	-e AUTH_TYPE=$(AUTH_TYPE) \
+	-e FLASK_ENV=development \
+	-e FLASK_DEBUG=1 -v $(PWD):/app basic_auth
 
 # Run docker container Tasks in background
 start:
