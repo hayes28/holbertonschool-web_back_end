@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ Session Authentication """
 from api.v1.auth.auth import Auth
-from models.user import User
 
 
 class SessionAuth(Auth):
@@ -30,4 +29,5 @@ class SessionAuth(Auth):
         # Get the user ID from the session ID
         user_id = self.user_id_for_session_id(session_id)
         # Retrieve and return the user instance from the database
+        from models.user import User
         return User.get(user_id)
