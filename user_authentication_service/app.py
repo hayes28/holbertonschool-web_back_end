@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ Module of Authentication """
-from flask import Flask, jsonify, request, abort, redirect
+from flask import Flask, jsonify, request, abort, make_response
 from auth import Auth
 
 AUTH = Auth()
@@ -64,12 +64,15 @@ def logout():
         - JSON payload
       """
     session_id = request.cookies.get("session_id")
-    user = AUTH.get_user_from_session_id(session_id=session_id)
-    if user:
-        AUTH.destroy_session(user.id)
-        return redirect("/")
-    else:
+
+    user = AUTH.get_user_from_session_id(session_id)
+
+    if user is None:
         abort(403)
+
+    AUTH.destroy_session(user.id)
+    response = make_response("OK", 200)
+    return response
 
 
 if __name__ == "__main__":
