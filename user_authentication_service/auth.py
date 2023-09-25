@@ -45,7 +45,8 @@ class Auth:
             return None
 
     def get_user_from_session_id(self, session_id: str) -> Type[User]:
-        """ Method that returns a User corresponding to a session ID or None """
+        """ Method that returns a User
+        corresponding to a session ID or None """
         if session_id is None:
             return None
         try:
