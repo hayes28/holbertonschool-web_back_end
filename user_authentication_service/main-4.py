@@ -2,6 +2,11 @@
 """
 Main file
 """
-from auth import _hash_password
+from auth import Auth
 
-print(_hash_password("Hello Holberton"))
+# Create an instance of the Auth class
+auth_instance = Auth()
+
+# Call the _hash_password method on the instance
+print(auth_instance._hash_password("Hello Holberton"))
+
