@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """ Module of Authentication """
-from flask import Flask, jsonify, request, abort, make_response
+from flask import Flask, jsonify, request, abort
 from auth import Auth
-from dotenv import load_dotenv
-load_dotenv()
 
 AUTH = Auth()
 
