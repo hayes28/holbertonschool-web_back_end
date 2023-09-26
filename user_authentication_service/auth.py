@@ -39,6 +39,7 @@ class Auth:
         try:
             user = self._db.find_user_by(email=email)
             session_id = _generate_uuid()
+            print(f"Generated session ID: {session_id}")
             self._db.update_user(user.id, session_id=session_id)
             return session_id
         except NoResultFound:
@@ -51,7 +52,8 @@ class Auth:
             return None
         try:
             user = self._db.find_user_by(session_id=session_id)
-            return user.email
+            print(f"User from session ID: {user}")
+            return user
         except NoResultFound:
             return None
 
@@ -60,6 +62,7 @@ class Auth:
         user’s session ID to None."""
         try:
             self._db.update_user(user_id, session_id=None)
+            print(f"Session destroyed for user ID: {user_id}")
         except NoResultFound:
             return None
 
