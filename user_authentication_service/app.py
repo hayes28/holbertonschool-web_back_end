@@ -52,7 +52,7 @@ def login():
     session_id = AUTH.create_session(email)
     response = jsonify({"email": email, "message": "logged in"})
     response.set_cookie("session_id", session_id)
-    print(f"Session ID set in cookie: {session_id}")
+    # print(f"Session ID set in cookie: {session_id}")
     return response
 
 
@@ -72,6 +72,7 @@ def logout():
     else:
         abort(403)
 
+
 @app.route("/profile", methods=["GET"])
 def profile():
     """ GET /profile
@@ -80,15 +81,14 @@ def profile():
       Return:
         - JSON payload"""
     session_id = request.cookies.get("session_id")
-    print(f"Debug: Session ID from cookie: {session_id}")  # Debug print
+    # print(f"Debug: Session ID from cookie: {session_id}")
     user = AUTH.get_user_from_session_id(session_id=session_id)
-    print(f"Debug: User object: {user}")  # Debug print
+    # print(f"Debug: User object: {user}")
 
     if user:
         return jsonify({"email": user.email})
     else:
         abort(403)
-
 
 
 if __name__ == "__main__":
