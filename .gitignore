@@ -5,3 +5,5 @@ Basic_authentication/docker-compose.yml
 Session_authentication/docker-compose.yml
 __MACOSX/
 Basic_authentication/
+user_authentication_service/a.db
+user_authentication_service/delete_test.py
