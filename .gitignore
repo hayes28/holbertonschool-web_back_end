@@ -1,9 +1,12 @@
 .vscode/settings.json
 *.pyc
 venv/
+__pycache__/
+myenv/
 Basic_authentication/docker-compose.yml
 Session_authentication/docker-compose.yml
 __MACOSX/
 Basic_authentication/
 user_authentication_service/a.db
 user_authentication_service/delete_test.py
+Unittests_and_integration_tests/myenv/lib/python3.10/site-packages/astroid-2.15.8.dist-info/CONTRIBUTORS.txt
