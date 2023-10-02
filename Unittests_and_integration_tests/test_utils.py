@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Unittests and Integration Tests project """
+""" Test Utils """
 
 import unittest
 from parameterized import parameterized
