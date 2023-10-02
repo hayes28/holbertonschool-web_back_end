@@ -3,7 +3,6 @@
 from flask import Flask, render_template
 
 
-print("Flask imported successfully")
 app = Flask(__name__)
 
 
