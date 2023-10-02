@@ -6,6 +6,7 @@ from parameterized import parameterized
 from utils import access_nested_map, get_json, memoize
 from unittest.mock import patch, Mock
 
+
 class TestAccessNestedMap(unittest.TestCase):
     """ TestAccessNestedMap Class """
 
@@ -27,6 +28,7 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(expected):
             access_nested_map(nested_map, path)
 
+
 class TestGetJson(unittest.TestCase):
     """ TestGetJson Class """
 
@@ -40,6 +42,7 @@ class TestGetJson(unittest.TestCase):
         mock_get.return_value.json.return_value = test_payload
         self.assertEqual(get_json(test_url), test_payload)
         mock_get.return_value.json.assert_called_once()
+
 
 class TestMemoize(unittest.TestCase):
     """ TestMemoize Class """
@@ -57,7 +60,11 @@ class TestMemoize(unittest.TestCase):
                 """ a_property method """
                 return self.a_method()
 
-        with patch.object(TestClass, 'a_method', return_value=42) as mock_method:
+        with patch.object(
+            TestClass,
+            'a_method',
+            return_value=42
+                ) as mock_method:
             test = TestClass()
             test.a_property
             test.a_property
