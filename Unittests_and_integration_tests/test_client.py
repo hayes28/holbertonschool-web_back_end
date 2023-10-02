@@ -7,7 +7,6 @@ from parameterized import parameterized
 from client import GithubOrgClient
 
 
-
 class TestGithubOrgClient(unittest.TestCase):
     """TestGithubOrgClient Class"""
     @parameterized.expand([
@@ -41,15 +40,18 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_public_repos(self, mock_get_json):
         """ Test GithubOrgClient.public_repos """
 
-        # Mock the return value of get_json
         mock_get_json.return_value = [
             {"name": "repo1"},
             {"name": "repo2"},
         ]
 
-        with patch.object(GithubOrgClient, '_public_repos_url', new_callable=PropertyMock) as mock_public_repos_url:
+        with patch.object(
+            GithubOrgClient,
+            '_public_repos_url',
+            new_callable=PropertyMock
+        ) as mock_public_repos_url:
 
-            mock_public_repos_url.return_value = "some_value"
+            mock_public_repos_url.return_value = "www.yes.com"
 
             test_class = GithubOrgClient("test")
             result = test_class.public_repos()
