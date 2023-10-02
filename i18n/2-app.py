@@ -2,7 +2,7 @@
 """ 2. Get locale from request
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel, get_locale
+from flask_babel import Babel
 
 
 app = Flask(__name__)
@@ -27,7 +27,8 @@ def index():
     """
     return render_template('1-index.html')
 
-babel.init_app(app, locale_selector=get_locale)
+
+@babel.localeselector
 def get_locale():
     """ Determine best match for supported languages
     Return:
