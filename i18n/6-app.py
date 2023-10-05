@@ -8,6 +8,7 @@ from flask_babel import Babel
 app = Flask(__name__)
 babel = Babel(app)
 
+
 class Config:
     """ Babel configuration """
     LANGUAGES = ["en", "fr"]
@@ -31,6 +32,7 @@ users = {
     3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
+
 
 def get_user():
     """ Returns a user dictionary or None if the ID cannot be found """
