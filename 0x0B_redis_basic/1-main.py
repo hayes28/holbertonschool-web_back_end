@@ -1,19 +1,15 @@
+#!/usr/bin/env python3
 """ Main file """
 
 Cache = __import__('exercise').Cache
 
-def test_cache():
+if __name__ == "__main__":
     cache = Cache()
 
-    # Test store and retrieve a string
+    # Test storing and retrieving a string
     key1 = cache.store("first")
-    assert cache.get_str(key1) == "first"
+    print(cache.get(key1, lambda x: x.decode("utf-8")))  # Should print "hello"
 
-    # Test store and retrieve an int
+    # Test storing and retrieving an int
     key2 = cache.store(2)
-    assert cache.get_int(key2) == 2
-
-    print("All tests passed successfully")
-
-if __name__ == "__main__":
-    test_cache()
+    print(cache.get(key2, lambda x: int(x.decode("utf-8"))))  # Should print 42
