@@ -32,6 +32,25 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
+def replay(method: Callable):
+    """ Display the history of calls of a particular function """
+    # Display the history of calls of a particular function
+    r = redis.Redis()
+    # Get the number of times the function was called
+    name = method.__qualname__
+    count = r.get(name).decode("utf-8")
+    # Get the inputs
+    inputs = r.lrange("{}:inputs".format(name), 0, -1)
+    # Get the outputs
+    outputs = r.lrange("{}:outputs".format(name), 0, -1)
+    # Display the history of calls of a particular function
+    print("{} was called {} times:".format(name, count))
+    # Display the history of inputs and outputs
+    for i, o in zip(inputs, outputs):
+        print("{}(*{}) -> {}".format(name, i.decode("utf-8"),
+                                     o.decode("utf-8")))
+
+
 class Cache:
     """ Cache class """
     def __init__(self):
@@ -71,3 +90,12 @@ class Cache:
     def get_int(self, key: bytes) -> int:
         """ Convert bytes to int """
         return self.get(key, fn=lambda x: int(x.decode("utf-8")))
+
+
+# Usage example
+if __name__ == '__main__':
+    cache = Cache()
+    cache.store("foo")
+    cache.store("bar")
+    cache.store(42)
+    replay(cache.store)
