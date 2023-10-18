@@ -13,3 +13,8 @@ Unittests_and_integration_tests/myenv/lib/python3.10/site-packages/astroid-2.15.
 i18n/babel.cfg
 i18n/requirements.txt
 i18n/babel.cfg
+NoSQL/dump.zip
+NoSQL/docker-compose.yml
+NoSQL/run_task.sh
+NoSQL/dump/logs/nginx.bson
+NoSQL/dump/logs/nginx.metadata.json
