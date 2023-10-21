@@ -25,7 +25,7 @@ class Server:
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
-                self.__dataset = [row for row in reader][1:]
+                self.__dataset = list(reader)[1:]
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:

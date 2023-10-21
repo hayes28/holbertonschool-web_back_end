@@ -65,8 +65,7 @@ def logout():
         - JSON payload
       """
     session_id = request.cookies.get("session_id")
-    user = AUTH.get_user_from_session_id(session_id=session_id)
-    if user:
+    if user := AUTH.get_user_from_session_id(session_id=session_id):
         AUTH.destroy_session(user.id)
         response = redirect("/")
         response.set_cookie("session_id", "", expires=0)
@@ -83,11 +82,7 @@ def profile():
       Return:
         - JSON payload"""
     session_id = request.cookies.get("session_id")
-    # print(f"Debug: Session ID from cookie: {session_id}")
-    user = AUTH.get_user_from_session_id(session_id=session_id)
-    # print(f"Debug: User object: {user}")
-
-    if user:
+    if user := AUTH.get_user_from_session_id(session_id=session_id):
         return jsonify({"email": user.email})
     else:
         abort(403)

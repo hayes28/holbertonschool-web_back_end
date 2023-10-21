@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """ 11-main """
+
 from pymongo import MongoClient
 list_all = __import__('8-all').list_all
 insert_school = __import__('9-insert_school').insert_school
@@ -21,4 +22,6 @@ if __name__ == "__main__":
 
     schools = schools_by_topic(school_collection, "Python")
     for school in schools:
-        print("[{}] {} {}".format(school.get('_id'), school.get('name'), school.get('topics', "")))
+        print(
+            f"""[{school.get('_id')}] {school.get('name')} {school.get('topics', "")}"""
+        )
