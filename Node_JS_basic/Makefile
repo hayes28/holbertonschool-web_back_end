@@ -14,7 +14,7 @@ lint:
 
 # build the docker image
 build:
-	docker build -t nodejs-image .
+	docker build --no-cache -t nodejs-image .
 
 # Run the docker container
 run:
