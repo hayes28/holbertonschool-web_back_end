@@ -6,7 +6,7 @@ async function countStudents(path) {
   try {
     const data = await fs.readFile(path, 'utf8');
     const lines = data.split('\n');
-    const header = lines.slice(1);  // Exclude the CSV header line
+    const header = lines.slice(1);
 
     let totalStudents = 0;
     const studentsByField = {};
@@ -22,20 +22,15 @@ async function countStudents(path) {
         studentsByField[field].push(fields[0]);
       }
     }
+    console.log(`Number of students: ${totalStudents}`);
+    console.log(studentsByField);
 
-    // Construct the response text
-    let responseText = `Number of students: ${totalStudents}\n`;
-    for (const field in studentsByField) {
-      if (Object.prototype.hasOwnProperty.call(studentsByField, field)) {
-        const list = studentsByField[field];
-        const count = list.length;
-        const names = list.join(', ');
-        responseText += `Number of students in ${field}: ${count}. List: ${names}\n`;
-      }
-    }
-
-    return responseText;
+    return {
+      totalStudents,
+      studentsByField,
+    };
   } catch (error) {
+    console.error(error);
     throw new Error('Cannot load the database');
   }
 }
