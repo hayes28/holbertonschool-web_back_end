@@ -28,7 +28,6 @@ app.get('/students', async (req, res) => {
   res.end();
 });
 
-
 app.listen(1245, () => {
   console.log('Listening on port 1245');
 });
