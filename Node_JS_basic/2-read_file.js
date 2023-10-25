@@ -8,16 +8,16 @@ function countStudents(path) {
     throw new Error('Cannot load the database');
   }
 
-  // Read the file synchronously, and gets content as a string
+// Read the file synchronously, and gets content as a string
   const data = fs.readFileSync(path, 'utf8');
-  // Split the string into an array of lines
+// Split the string into an array of lines
   const lines = data.trim().split('\n');
-  // Remove the first line (header)
+// Remove the first line (header)
   const header = lines.slice(1);
 
   // Count the number of students by field
   let totalStudents = 0;
-  // Create an object with the number of students by field
+// Create an object with the number of students by field
   const studentsByField = {};
 
   for (const student of header) {
@@ -36,10 +36,12 @@ function countStudents(path) {
 
   console.log(`Number of students: ${totalStudents}`);
   for (const field in studentsByField) {
+    if (!Object.prototype.hasOwnProperty.call(studentsByField, field)) {
     const list = studentsByField[field];
     const count = list.length;
     const names = list.join(', ');
     console.log(`Number of students in ${field}: ${count}. List: ${names}`);
+    }
   }
 }
 
