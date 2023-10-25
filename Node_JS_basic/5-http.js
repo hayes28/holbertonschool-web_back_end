@@ -6,13 +6,15 @@ const countStudents = require('./3-read_file_async');
 const app = http.createServer(async (req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   if (req.url === '/') {
-    res.end('Hello Holberton School!');
+    res.write('Hello Holberton School!');
+    res.end();
   } else if (req.url === '/students') {
-    res.end('This is the list of our students');
+    res.write('This is the list of our students\n');
     try {
-      await countStudents('./test/database.csv');
+      const studentsByField = await countStudents('./test/database.csv');
+      res.write(studentsByField);
     } catch (error) {
-      res.write(error.message);
+      res.write('Cannot load the database\n');
     }
     res.end();
   } else {
