@@ -1,4 +1,5 @@
 .vscode/settings.json
+node_modules/
 *.pyc
 venv/
 __pycache__/
@@ -18,3 +19,4 @@ NoSQL/docker-compose.yml
 NoSQL/run_task.sh
 NoSQL/dump/logs/nginx.bson
 NoSQL/dump/logs/nginx.metadata.json
+Node_JS_basic/node_modules/.bin/babel-external-helpers
