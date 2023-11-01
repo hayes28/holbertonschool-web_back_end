@@ -20,3 +20,11 @@ NoSQL/run_task.sh
 NoSQL/dump/logs/nginx.bson
 NoSQL/dump/logs/nginx.metadata.json
 Node_JS_basic/node_modules/.bin/babel-external-helpers
+queuing_system_in_js/redis-7.2.2.tar.gz
+queuing_system_in_js/Dockerfile
+queuing_system_in_js/dump.rdb
+queuing_system_in_js/Makefile
+queuing_system_in_js/package-lock.json
+queuing_system_in_js/package.json
+queuing_system_in_js/set
+.gitignore
