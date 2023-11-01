@@ -2,6 +2,7 @@
 const request = require('request');
 const { expect } = require('chai');
 
+
 describe('Index page', function () {
     it('should return the correct status code and result', function (done) {
         request('http://localhost:7865', function (error, response, body) {
@@ -13,10 +14,12 @@ describe('Index page', function () {
     });
 });
 
-    it('should return correct result', function (done) {
-        request('http://localhost:7865', function (error, response, body) {
+describe('Cart page', function () {
+    it('should return the correct status code and result', function (done) {
+        request('http://localhost:7865/cart/12', function (error, response, body) {
+            if (error) return done(error);
             expect(response.statusCode).to.equal(200);
-            expect(body).to.equal('Welcome to the payment system');
+            expect(body).to.equal(`Payment methods for cart 12`);
             done();
         });
     });
@@ -27,3 +30,4 @@ describe('Index page', function () {
             done();
         });
     });
+});
