@@ -1,29 +1,29 @@
 // 10. Writing the job creation function
 
-function createPushNotificationsJobs(jobs, queue) {
+const createPushNotificationsJobs = (jobs, queue) => {
     if (!Array.isArray(jobs)) {
-      throw Error('Jobs is not an array');
+        throw new Error('Jobs is not an array');
     }
 
-    jobs.forEach((jobData) => {
-        const job = queue.create('push_notification_code_3', jobData).save((err) => {
-            if (!err) {
-                console.log(`Notification job created: ${job.id}`);
-            }
-        });
+    for (const job of jobs) {
+        const newJob = queue.create('push_notification_code_3', job).save();
 
-        job.on('complete', () => {
-            console.log(`Notification job ${job.id} completed`);
-        });
+        try {
+            newJob
+                .on('enqueue', () => {
+                    console.log(`Notification job created: ${newJob.id}`);
+                })
+                .on('complete', () => {
+                    console.log(`Notification job ${newJob.id} completed`);
+                })
+                .on('failed', (err) => {
+                    console.log(`Notification job ${newJob.id} failed: ${err}`);
+                })
+                .on('progress', (progress) => {
+                    console.log(`Notification job ${newJob.id} ${progress}% complete`);
+                });
+        } catch (err) { }
+    }
+};
 
-        job.on('failed', (err) => {
-            console.log(`Notification job ${job.id} failed: ${err}`);
-        });
-
-        job.on('progress', (progress) => {
-            console.log(`Notification job ${job.id} ${progress}% complete`);
-        });
-    });
-}
-
-export default createPushNotificationsJobs;
+module.exports = createPushNotificationsJobs;
