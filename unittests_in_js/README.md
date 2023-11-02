@@ -73,6 +73,7 @@ Testing is like the seatbelt of coding. It won’t prevent accidents, but it'll 
 
 ##### Expected output
 
+```bash
 > const calculateNumber = require("./0-calcul.js");
 > calculateNumber(1, 3)
 4
@@ -83,9 +84,11 @@ Testing is like the seatbelt of coding. It won’t prevent accidents, but it'll 
 > calculateNumber(1.5, 3.7)
 6
 >
+```
 
 ##### Run test
 
+```bash
 bob@dylan:~$ npm test 0-calcul.test.js
 
 > task_0@1.0.0 test /root
@@ -99,6 +102,7 @@ bob@dylan:~$ npm test 0-calcul.test.js
 
   130 passing (35ms)
 bob@dylan:~$
+```
 
 [File: 0-calcul.js](./0-calcul.js)
 [File: 0-calcul.test.js](./0-calcul.test.js)
@@ -133,6 +137,7 @@ bob@dylan:~$
 
 ##### Expected output
 
+```bash
 > const calculateNumber = require("./1-calcul.js");
 > calculateNumber('SUM', 1.4, 4.5)
 6
@@ -142,6 +147,7 @@ bob@dylan:~$
 0.2
 > calculateNumber('DIVIDE', 1.4, 0)
 'Error'
+```
 
 [File: 1-calcul.js](./1-calcul.js)
 [File: 1-calcul.test.js](./1-calcul.test.js)
@@ -293,6 +299,7 @@ When you have a long list of tests, and you can’t figure out why a test is bre
 
 You will be using this file, conveniently named 7-skip.test.js
 
+```bash
 const { expect } = require('chai');
 
 describe('Testing numbers', () => {
@@ -328,6 +335,7 @@ describe('Testing numbers', () => {
     expect(7 === 7).to.be.true;
   });
 });
+```
 
 ##### Using the file 7-skip.test.js:
 
@@ -349,6 +357,7 @@ describe('Testing numbers', () => {
 
 In a folder 8-api located at the root of the project directory, copy this package.json over.
 
+```bash
 {
   "name": "8-api",
   "version": "1.0.0",
@@ -369,6 +378,7 @@ In a folder 8-api located at the root of the project directory, copy this packag
     "sinon": "^7.5.0"
   }
 }
+```
 
 ##### Create a new file api.js:
 
@@ -385,12 +395,16 @@ In a folder 8-api located at the root of the project directory, copy this packag
 
 ##### Server
 
-Terminal 1
+###### Terminal 1
 
+```bash
 bob@dylan:~/8-api$  node api.js
 API available on localhost port 7865
-Terminal 2
+```
 
+###### Terminal 2
+
+```bash
 bob@dylan:~/8-api$  curl http://localhost:7865 ; echo ""
 Welcome to the payment system
 bob@dylan:~/8-api$
@@ -409,6 +423,7 @@ bob@dylan:~/8-api$ npm test api.test.js
   23 passing (256ms)
 
 bob@dylan:~/8-api$
+```
 
 ##### Tips:
 
@@ -443,8 +458,9 @@ In a folder 9-api, reusing the previous project in 8-api (package.json, api.js a
 
 ##### Server
 
-Terminal 1
+###### Terminal 1
 
+```bash
 bob@dylan:~$ node api.js
 API available on localhost port 7865
 Terminal 2
@@ -482,6 +498,7 @@ bob@dylan:~$ curl http://localhost:7865/cart/hello -v
 </html>
 * Connection #0 to host localhost left intact
 bob@dylan:~$
+```
 
 ##### Tips:
 
@@ -503,12 +520,16 @@ In a folder 10-api, reusing the previous project in 9-api (package.json, api.js 
 ##### Modify the file api.js:
 
 - Add an endpoint GET /available_payments that returns an object with the following structure:
+
+```bash
 {
   payment_methods: {
     credit_cards: true,
     paypal: false
   }
 }
+```
+
 - Add an endpoint POST /login that returns the message Welcome :username where :username is the value of the body variable userName.
 
 ##### Modify the file api.test.js:
@@ -518,18 +539,23 @@ In a folder 10-api, reusing the previous project in 9-api (package.json, api.js 
 
 ##### Server
 
-Terminal 1
+###### Terminal 1
 
+```bash
 bob@dylan:~$ node api.js
 API available on localhost port 7865
-Terminal 2
+```
 
+###### Terminal 2
+
+```bash
 bob@dylan:~$ curl http://localhost:7865/available_payments ; echo ""
 {"payment_methods":{"credit_cards":true,"paypal":false}}
 bob@dylan:~$
 bob@dylan:~$ curl -XPOST http://localhost:7865/login -d '{ "userName": "Betty" }' -H 'Content-Type: application/json' ; echo ""
 Welcome Betty
 bob@dylan:~$
+```
 
 ##### Tips:
 
@@ -545,11 +571,6 @@ bob@dylan:~$
 [File: 10-api/api.test.js](./10-api/api.test.js)
 [File: 10-api/package.json](./10-api/package.json)
 
-### 11. No table for a meeting
-
-- Create a view `need_meeting` that lists all students that have a score under 80 and no `last_meeting` or more than 1 month.
-
-[File: 11-need_meeting.sql](./11-need_meeting.sql)
 
 ## Author
 
